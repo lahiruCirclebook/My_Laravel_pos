@@ -21,6 +21,33 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- Bootstrap Css -->
+    <link href="{{ URL::asset('assets/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet"
+        type="text/css" />
+    <!-- Icons Css -->
+    <link href="{{ URL::asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/fontawesome.min.css">
+      <!-- App Css-->
+      <link href="{{ URL::asset('assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
+
+
+      <!-- DataTables -->
+      <link href="{{ URL::asset('assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+      <link href="{{ URL::asset('assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+
+      <!-- Responsive datatable examples -->
+      <link href="{{ URL::asset('assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+      <link href="{{ URL::asset('/assets/libs/rwd-table/rwd-table.min.css') }}" rel="stylesheet" type="text/css" />
+      <!-- Sweet Alert-->
+      <link href="{{ URL::asset('/assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <style>
+  {{--            td,th,p,button,input[type=text],select,label, h1,h2,h3,h4,h5,h6{ --}}
+  {{--                text-transform: uppercase; --}}
+  {{--            } --}}
+
+          </style>
 </head>
 
 <body>
@@ -56,92 +83,139 @@
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
+                                </li> @endif
+@else
+<li class="nav-item
+        dropdown">
+    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false" v-pre>
+        {{ Auth::user()->name }}
+    </a>
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
+    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="{{ route('logout') }}"
+            onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+            {{ __('Logout') }}
+        </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+        </form>
+    </div>
+    </li>
+@endguest
+</ul>
+</div>
+</div>
+</nav>
+
+<main class="py-4">
+    @yield('content')
+</main>
+
+{{-- sidbar section --}}
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal left fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="staticBackdropLabel">sidebar</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-        </nav>
-
-        <main class="py-4">
-            @yield('content')
-        </main>
-
-        {{-- sidbar section --}}
-        <!-- Button trigger modal -->
-
-
-        <!-- Modal -->
-        <div class="modal left fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
-            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="staticBackdropLabel">sidebar</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        @include('layouts.includes.sidebar')
-                    </div>
-                </div>
+            <div class="modal-body">
+                @include('layouts.includes.sidebar')
             </div>
         </div>
-
-        <style>
-            .modal.left .modal-dialog {
-                position: absolute;
-                top: 0;
-                left: 0;
-                margin: 0;
-
-            }
-
-            .modal.left .modal-dialog.modal-sm {
-                max-width: 300px;
-            }
-
-            .modal.left .modal-content {
-                min-height: 100vh;
-                border: 0;
-            }
-
-            h4 {
-                font-family: Verdana, Geneva, Tahoma, sans-serif;
-                font-size: 20px;
-                font-weight: bolder;
-            }
-        </style>
-
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
-    </script>
-    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
-        integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous">
-    </script>
+</div>
+
+<style>
+    .modal.left .modal-dialog {
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 0;
+
+    }
+
+    .modal.left .modal-dialog.modal-sm {
+        max-width: 300px;
+    }
+
+    .modal.left .modal-content {
+        min-height: 100vh;
+        border: 0;
+    }
+
+    h4 {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 20px;
+        font-weight: bolder;
+    }
+</style>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+</script>
+<script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
+    integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous">
+</script>
+<!-- JAVASCRIPT -->
+<script src="{{ URL::asset('assets/libs/jquery/jquery.min.js') }}"></script>
+<script src="{{ URL::asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ URL::asset('assets/libs/metismenu/metisMenu.min.js') }}"></script>
+<script src="{{ URL::asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
+<script src="{{ URL::asset('assets/libs/node-waves/waves.min.js') }}"></script>
+
+<!-- apexcharts -->
+<script src="{{ URL::asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script>
+
+<!-- dashboard init -->
+<script src="{{ URL::asset('assets/js/pages/dashboard.init.js') }}"></script>
+
+<!-- App js -->
+<script src="{{ URL::asset('assets/js/app.js') }}"></script>
+
+<!-- Required datatable js -->
+<script src="{{ asset('assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+
+<script src="{{ URL::asset('assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<!-- Buttons examples -->
+<script src="{{ URL::asset('assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
+<script src="{{ URL::asset('assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js') }}"></script>
+<script src="{{ URL::asset('assets/libs/jszip/jszip.min.js') }}"></script>
+<script src="{{ URL::asset('assets/libs/pdfmake/build/pdfmake.min.js') }}"></script>
+<script src="{{ URL::asset('assets/libs/pdfmake/build/vfs_fonts.js') }}"></script>
+<script src="{{ URL::asset('assets/libs/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
+<script src="{{ URL::asset('assets/libs/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
+<script src="{{ URL::asset('assets/libs/datatables.net-buttons/js/buttons.colVis.min.js') }}"></script>
+
+<!-- Responsive examples -->
+<script src="{{ URL::asset('assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ URL::asset('assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
+
+<!-- Datatable init js -->
+<script src="{{ URL::asset('assets/js/pages/datatables.init.js') }}"></script>
+
+<!-- Sweet Alerts js -->
+<script src="{{ URL::asset('/assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
+
+<!-- Sweet alert init js-->
+<script src="{{ URL::asset('/assets/js/pages/sweet-alerts.init.js') }}"></script>
+<!-- apexcharts init -->
+<script src="{{ URL::asset('assets/js/pages/apexcharts.init.js') }}"></script>
+
+
+
 </body>
 
 </html>

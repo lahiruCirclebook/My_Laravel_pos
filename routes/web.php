@@ -35,3 +35,4 @@ Route::get('/transactions', [transactionController::class], 'index'); //index fu
 
 //user
 Route::post('addUser', [UserController::class, 'AddUser']);
+Route::post('editUser', [UserController::class, 'EditUser']);

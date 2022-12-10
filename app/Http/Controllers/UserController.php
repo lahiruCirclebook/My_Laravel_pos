@@ -51,4 +51,16 @@ class UserController extends Controller
             return redirect()->back()->with('New User Added Failer !');
         }
     }
+
+    public function EditUser($userId, Request $request)
+    {
+        $user = User::find($userId);
+        if (!$user) {
+            return redirect()->back()->with('User not found !');
+        }
+
+        $user->update($request->all());
+
+        return redirect()->back()->with('User Edit Successfully !');
+    }
 }
